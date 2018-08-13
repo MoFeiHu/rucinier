@@ -13,6 +13,7 @@ using  namespace cv;
 
 #define resizedHeight 480
 #define resizedWidth  600
+
 //#define frameTostart 20
 
 int main()
@@ -22,7 +23,7 @@ int main()
 	bool MULTISCALE = true;
 	bool SILENT = true;
 	bool LAB = false;
-	vector<KCFTracker> trackers;		//´´½¨Ò»¸öKCFTrackerÀàµÄÊı×é
+	vector<KCFTracker> trackers;		//åˆ›å»ºä¸€ä¸ªKCFTrackerç±»çš„æ•°ç»„
 	
 	VideoCapture capture("D:/Car Video/session0_center.avi");
 	if (!capture.isOpened())
@@ -38,7 +39,7 @@ int main()
 	int pause = 0;
 	Mat img;
 	Mat img_resized(resizedHeight, resizedWidth, CV_8UC3);
-	//capture.set(CAP_PROP_POS_FRAMES, frameTostart);			//ÉèÖÃÆğÊ¼Ö¡£»CAP_PROP_POS_FRAMES£ºµ¥Î»ÎªÖ¡ÊıµÄÎ»ÖÃ£¨½ö¶ÔÊÓÆµÎÄ¼şÓĞĞ§£©
+	//capture.set(CAP_PROP_POS_FRAMES, frameTostart);			//è®¾ç½®èµ·å§‹å¸§ï¼›CAP_PROP_POS_FRAMESï¼šå•ä½ä¸ºå¸§æ•°çš„ä½ç½®ï¼ˆä»…å¯¹è§†é¢‘æ–‡ä»¶æœ‰æ•ˆï¼‰
 	//MixtureOfGaussianV2 mog;
 	int nFrames = 0;
 	while (!pause)
@@ -59,7 +60,7 @@ int main()
 		Mat element = getStructuringElement(MORPH_RECT, Size(7, 7));
 		morphologyEx(img_mask, dst, MORPH_CLOSE, element);
 		morphologyEx(dst, dst, MORPH_OPEN, element);
-		imshow("ĞÎÌ¬Ñ§´¦Àíºó", dst);
+		imshow("å½¢æ€å­¦å¤„ç†å", dst);
 
 		vector<vector<Point>> contours;
 		vector<Vec4i> hierarchy;
@@ -136,7 +137,7 @@ int main()
 				
 		if (SILENT)
 		{
-			imshow("Ä¿±ê¸ú×Ù", img_resized);
+			imshow("ç›®æ ‡è·Ÿè¸ª", img_resized);
 			//waitKey(1);
 		}
 		if (cvWaitKey(10) == 'q')
@@ -144,9 +145,9 @@ int main()
 
 	}
 
-		//namedWindow("Ô­Í¼¼Ó±ß¿ò", WINDOW_NORMAL);
-		//imshow("Ô­Í¼¼Ó±ß¿ò", img_resized);
-		//cout << "¸ÃÖ¡ÂÖÀªÊıÁ¿Îª£º" << contours.size() << endl;
+		//namedWindow("åŸå›¾åŠ è¾¹æ¡†", WINDOW_NORMAL);
+		//imshow("åŸå›¾åŠ è¾¹æ¡†", img_resized);
+		//cout << "è¯¥å¸§è½®å»“æ•°é‡ä¸ºï¼š" << contours.size() << endl;
 		delete p;
 		cvDestroyAllWindows();
 		capture.release();
